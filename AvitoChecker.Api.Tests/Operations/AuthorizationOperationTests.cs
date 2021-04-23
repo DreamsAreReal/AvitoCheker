@@ -12,15 +12,16 @@ namespace AvitoChecker.Api.Tests.Operations
     {
         private Client _client; 
 
-        [OneTimeSetUp]
+        [SetUp]
         public void Setup()
         {
             _client = new Client();
         }
 
         [TestCase(1)]
-        public void ExecuteTests((string, string) data)
+        public void ExecuteTests(int accountMock)
         {
+            var data = AccountMock.Get(accountMock);
             AuthorizationOperation authorizationOperation = new AuthorizationOperation();
             AuthorizationParameter authorizationParameter = new AuthorizationParameter
             {
