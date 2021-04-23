@@ -15,7 +15,7 @@ namespace AvitoCheker.Api
         private readonly HttpClient _client;
         private readonly HttpClientHandler _handler;
 
-        public Client(IWebProxy proxy)
+        public Client(IWebProxy proxy = null)
         {
            
 
@@ -29,8 +29,7 @@ namespace AvitoCheker.Api
 
         public IOperationReturn ExecuteOperation(IOperation operation, IOperationParameter parameters)
         {
-            operation.SetClient(_client);
-            return operation.Execute(parameters);
+            return operation.Execute(parameters, _client);
         }
 
 
