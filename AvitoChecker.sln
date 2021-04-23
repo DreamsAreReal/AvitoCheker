@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvitoChecker.UI", "AvitoChecker.UI\AvitoChecker.UI.csproj", "{F46710B5-C438-4F90-983A-54A98466D5ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvitoChecker.Core", "AvitoChecker.Core\AvitoChecker.Core.csproj", "{72E08244-75CE-4B1D-92A3-80231A73C524}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvitoCheker.Api", "AvitoCheker.Api\AvitoCheker.Api.csproj", "{6F4893DB-1041-43BE-B4F7-F84B8342E1B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{F46710B5-C438-4F90-983A-54A98466D5ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F46710B5-C438-4F90-983A-54A98466D5ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F46710B5-C438-4F90-983A-54A98466D5ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72E08244-75CE-4B1D-92A3-80231A73C524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72E08244-75CE-4B1D-92A3-80231A73C524}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72E08244-75CE-4B1D-92A3-80231A73C524}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72E08244-75CE-4B1D-92A3-80231A73C524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F4893DB-1041-43BE-B4F7-F84B8342E1B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F4893DB-1041-43BE-B4F7-F84B8342E1B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F4893DB-1041-43BE-B4F7-F84B8342E1B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F4893DB-1041-43BE-B4F7-F84B8342E1B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
