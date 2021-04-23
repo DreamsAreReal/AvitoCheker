@@ -6,6 +6,6 @@ namespace AvitoCheker.Api.Operations.Returns
 {
     public class ListPhonesReturn : IOperationReturn
     {
-        private List<PhoneReturn> Phones { get; set; }
+        public List<PhoneReturn> Phones { get; set; }
     }
 }
