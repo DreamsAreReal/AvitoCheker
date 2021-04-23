@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using AvitoCheker.Api.Exceptions;
 using AvitoCheker.Api.Operations.Parameters;
 using AvitoCheker.Api.Operations.Returns;
 using Newtonsoft.Json;
@@ -10,7 +12,7 @@ using Newtonsoft.Json.Linq;
 
 namespace AvitoCheker.Api.Operations
 {
-    class GetPhoneInformationOperation : IOperation
+    public class GetPhoneInformationOperation : IOperation
     {
         /// <summary>
         /// Get phone information from phone settings page.
@@ -18,14 +20,26 @@ namespace AvitoCheker.Api.Operations
         /// </summary>
         /// <param name="client">HttpClient with session cookie.</param>
         /// <param name="parameters">Not required</param>
-        /// <returns></returns>
+        /// <returns>ListPhonesReturn</returns>
         public async Task<IOperationReturn> Execute(HttpClient client, IOperationParameter parameters = null)
         {
-            var response = await (await client.GetAsync(Routes.BaseUrl + Routes.PhoneSettingsUrl)).Content.ReadAsStringAsync();
+            // Need to send request. 
+            // If don't send key then will answer 403 code.
+            var getParams = $"?key={Settings.AppKey}";
+            var query = await client.GetAsync(Routes.BaseUrl + Routes.PhoneSettingsUrl + getParams);
+            if (query.StatusCode == HttpStatusCode.Forbidden)
+                throw new NeedAuthorizationException();
+
+            var response = await query.Content.ReadAsStringAsync();
             
-            if(JsonConvert.DeserializeObject(response) is JObject json)
+           
+            if (JsonConvert.DeserializeObject(response) is JObject json)
             {
                 var status = json["status"]?.ToString();
+                if (status == RequestCodes.Unauthenticated)
+                    throw new NeedAuthorizationException();
+
+
                 var phones = json["result"]?["phones"];
 
                 if (status == RequestCodes.Success && phones != null)
@@ -37,10 +51,10 @@ namespace AvitoCheker.Api.Operations
 
                     foreach (var phone in phones)
                     {
-                        bool.TryParse(json["result"]?["phones"]?["verified"]?.ToString(), out var isValid);
+                        bool.TryParse(phone?["verified"]?.ToString(), out var isValid);
                         answer.Phones.Add(new PhoneReturn()
                         {
-                            Number = json["result"]?["phones"]?["phone"]?.ToString(),
+                            Number = phone?["phone"]?.ToString(),
                             IsValid = isValid,
                         });    
                     }

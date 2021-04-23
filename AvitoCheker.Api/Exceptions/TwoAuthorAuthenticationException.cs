@@ -6,7 +6,7 @@ using System.Text;
 namespace AvitoCheker.Api.Exceptions
 {
     [Serializable]
-    public class AccountNoValidException : ArgumentException
+    public class TwoAuthorAuthenticationException : Exception
     {
         //
         // For guidelines regarding the creation of new exception types, see
@@ -15,23 +15,22 @@ namespace AvitoCheker.Api.Exceptions
         //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
         //
 
-        public AccountNoValidException()
+        public TwoAuthorAuthenticationException()
         {
         }
 
-        public AccountNoValidException(string message) : base(message)
+        public TwoAuthorAuthenticationException(string message) : base(message)
         {
         }
 
-        public AccountNoValidException(string message, Exception inner) : base(message, inner)
+        public TwoAuthorAuthenticationException(string message, Exception inner) : base(message, inner)
         {
         }
 
-        protected AccountNoValidException(
+        protected TwoAuthorAuthenticationException(
             SerializationInfo info,
             StreamingContext context) : base(info, context)
         {
         }
     }
-    
 }

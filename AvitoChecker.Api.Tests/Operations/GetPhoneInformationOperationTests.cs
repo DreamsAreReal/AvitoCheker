@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using AvitoCheker.Api;
 using AvitoCheker.Api.Exceptions;
 using AvitoCheker.Api.Operations;
@@ -10,9 +9,9 @@ using NUnit.Framework;
 
 namespace AvitoChecker.Api.Tests.Operations
 {
-    class AuthorizationOperationTests
+    class GetPhoneInformationOperationTests
     {
-        private Client _client; 
+        private Client _client;
 
         [SetUp]
         public void Setup()
@@ -20,24 +19,32 @@ namespace AvitoChecker.Api.Tests.Operations
             _client = new Client();
         }
 
-        
+
         [TestCase(3)]
         public void ExecuteTests(int accountMock)
         {
             var data = AccountMock.Get(accountMock);
-            AuthorizationOperation authorizationOperation = new AuthorizationOperation();
+
             AuthorizationParameter authorizationParameter = new AuthorizationParameter
             {
                 Username = data.Item1,
                 Password = data.Item2
             };
-            
-           
-            var result = (AuthorizationReturn)_client.ExecuteOperation(authorizationOperation, authorizationParameter).Result;
+            AuthorizationOperation authorizationOperation = new AuthorizationOperation();
+            _client.ExecuteOperation(authorizationOperation, authorizationParameter).Wait();
 
-            if(string.IsNullOrEmpty(result.Id) 
-            && string.IsNullOrEmpty(result.Session))
-                Assert.Fail();
+            GetPhoneInformationOperation getPhoneInformationOperation = new GetPhoneInformationOperation();
+            
+            
+
+
+            var result = (ListPhonesReturn)_client.ExecuteOperation(getPhoneInformationOperation).Result;
+
+            foreach (var phone in result.Phones)
+            {
+                if (string.IsNullOrEmpty(phone.Number))
+                    Assert.Fail();
+            }
 
             Assert.Pass();
         }
@@ -53,29 +60,19 @@ namespace AvitoChecker.Api.Tests.Operations
         [TestCase(10)]
         public void ExecuteNegativeTests(int accountMock)
         {
-            var data = AccountMock.Get(accountMock);
-            AuthorizationOperation authorizationOperation = new AuthorizationOperation();
-            AuthorizationParameter authorizationParameter = new AuthorizationParameter
-            {
-                Username = data.Item1,
-                Password = data.Item2
-            };
 
+            GetPhoneInformationOperation getPhoneInformationOperation = new GetPhoneInformationOperation();
 
             try
             {
-                _client.ExecuteOperation(authorizationOperation, authorizationParameter).Wait();
+                _client.ExecuteOperation(getPhoneInformationOperation, null).Wait();
             }
-         
-            catch(AggregateException ex)
+
+            catch (AggregateException ex)
             {
                 foreach (var exception in ex.InnerExceptions)
                 {
-                    if (exception is WrongDataException
-                    || exception is BlockedException
-                    || exception is TwoAuthorAuthenticationException
-                    || exception is WrongPasswordException
-                    || exception is PasswordWasResetException)
+                    if (exception is NeedAuthorizationException)
                     {
                         Assert.Pass();
                     }
@@ -83,9 +80,7 @@ namespace AvitoChecker.Api.Tests.Operations
                 Assert.Fail($"Was {ex}");
             }
 
-            
+
         }
-
-
     }
 }

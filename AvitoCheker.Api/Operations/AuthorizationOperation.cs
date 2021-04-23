@@ -7,6 +7,7 @@ using AvitoCheker.Api.Operations.Returns;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Threading.Tasks;
+using AvitoCheker.Api.Properties;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -19,7 +20,7 @@ namespace AvitoCheker.Api.Operations
         /// </summary>
         /// <param name="client">Any client</param>
         /// <param name="parameters">Required AuthorizationParameter</param>
-        /// <returns></returns>
+        /// <returns>AuthorizationReturn</returns>
         public async Task<IOperationReturn> Execute(HttpClient client, IOperationParameter parameters = null)
         {
             var data = (AuthorizationParameter) parameters;
@@ -27,7 +28,7 @@ namespace AvitoCheker.Api.Operations
             if (String.IsNullOrEmpty(data.Username)
                 && String.IsNullOrEmpty(data.Password))
             {
-                throw new AccountNoValidException();
+                throw new WrongDataException();
             }
             
 
@@ -45,11 +46,17 @@ namespace AvitoCheker.Api.Operations
                 var requestCode = json["status"]?.ToString();
 
 
-                if (requestCode == RequestCodes.WrongData 
-                    || requestCode==RequestCodes.WrongPassword 
-                    || requestCode==RequestCodes.NeedSms
-                    || requestCode==RequestCodes.Blocked)
-                    throw new AccountNoValidException();
+                if (requestCode == RequestCodes.WrongData)
+                    throw new WrongDataException();
+                else if (requestCode == RequestCodes.WrongPassword)
+                    throw new WrongPasswordException();
+                else if (requestCode == RequestCodes.NeedSms)
+                    throw new TwoAuthorAuthenticationException();
+                else if (requestCode == RequestCodes.Blocked) 
+                    throw new BlockedException();
+                else if (requestCode == RequestCodes.PasswordWasReset)
+                    throw new PasswordWasResetException();
+
 
                 if (requestCode == RequestCodes.Success)
                     return new AuthorizationReturn
