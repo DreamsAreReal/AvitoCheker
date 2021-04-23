@@ -7,12 +7,14 @@ namespace AvitoChecker.Core
 {
     abstract class AbstractStorage
     {
-        private const string fileDirectory = "data";
+        protected const string FileDirectory = "data";
 
         public AbstractStorage()
         {
-            if (!Directory.Exists(fileDirectory))
-                Directory.CreateDirectory(fileDirectory);
+            if (!Directory.Exists(FileDirectory))
+                Directory.CreateDirectory(FileDirectory);
         }
+
+        
     }
 }
