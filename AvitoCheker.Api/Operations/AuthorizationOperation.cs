@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using AvitoCheker.Api.Exceptions;
-using AvitoCheker.Api.Operations.Parameters;
-using AvitoCheker.Api.Operations.Returns;
-using System.Collections.Specialized;
-using System.Configuration;
 using System.Threading.Tasks;
-using AvitoCheker.Api.Properties;
+using AvitoCheсker.Api.Exceptions;
+using AvitoCheсker.Api.Operations.Parameters;
+using AvitoCheсker.Api.Operations.Returns;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace AvitoCheker.Api.Operations
+namespace AvitoCheсker.Api.Operations
 {
     public class AuthorizationOperation : IOperation
     {

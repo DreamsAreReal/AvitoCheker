@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AvitoCheker.Api.Operations.Parameters
+﻿namespace AvitoCheсker.Api.Operations.Parameters
 {
     public class AuthorizationParameter : IOperationParameter
     {

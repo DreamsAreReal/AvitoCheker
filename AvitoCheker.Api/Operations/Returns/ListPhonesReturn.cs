@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace AvitoCheker.Api.Operations.Returns
+namespace AvitoCheсker.Api.Operations.Returns
 {
     public class ListPhonesReturn : IOperationReturn
     {

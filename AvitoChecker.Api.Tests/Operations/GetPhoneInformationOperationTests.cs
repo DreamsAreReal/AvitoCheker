@@ -1,10 +1,9 @@
 ﻿using System;
-using AvitoCheker.Api;
-using AvitoCheker.Api.Exceptions;
-using AvitoCheker.Api.Operations;
-using AvitoCheker.Api.Operations.Parameters;
-using AvitoCheker.Api.Operations.Returns;
-using AvitoCheker.Api.Properties;
+using AvitoCheсker.Api;
+using AvitoCheсker.Api.Exceptions;
+using AvitoCheсker.Api.Operations;
+using AvitoCheсker.Api.Operations.Parameters;
+using AvitoCheсker.Api.Operations.Returns;
 using NUnit.Framework;
 
 namespace AvitoChecker.Api.Tests.Operations

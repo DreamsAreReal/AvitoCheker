@@ -6,8 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NLog" Version="4.7.9" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AvitoChecker.Core\AvitoChecker.Core.csproj" />
-    <ProjectReference Include="..\AvitoCheker.Api\AvitoCheker.Api.csproj" />
+    <ProjectReference Include="..\AvitoCheker.Api\AvitoCheсker.Api.csproj" />
   </ItemGroup>
 
 </Project>

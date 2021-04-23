@@ -1,5 +1,5 @@
 ﻿using System;
-using AvitoCheker.Api;
+using AvitoChecker.Core;
 
 namespace AvitoChecker.UI
 {
@@ -8,6 +8,8 @@ namespace AvitoChecker.UI
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            new Test().TestLog();
+            Console.ReadLine();
         }
     }
 }

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
-namespace AvitoCheker.Api.Exceptions
+namespace AvitoCheсker.Api.Exceptions
 {
     [Serializable]
     public class WrongPasswordException : Exception

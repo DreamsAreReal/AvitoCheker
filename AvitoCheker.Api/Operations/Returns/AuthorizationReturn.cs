@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AvitoCheker.Api.Operations.Returns
+﻿namespace AvitoCheсker.Api.Operations.Returns
 {
     public class AuthorizationReturn : IOperationReturn
     {

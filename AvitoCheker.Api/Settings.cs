@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AvitoCheker.Api
+﻿namespace AvitoCheсker.Api
 {
     static class Settings
     {

@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using AvitoCheker.Api.Operations;
-using AvitoCheker.Api.Operations.Parameters;
-using AvitoCheker.Api.Operations.Returns;
+using AvitoCheсker.Api.Operations;
+using AvitoCheсker.Api.Operations.Parameters;
+using AvitoCheсker.Api.Operations.Returns;
 
-namespace AvitoCheker.Api
+namespace AvitoCheсker.Api
 {
     public class Client : IDisposable
     {

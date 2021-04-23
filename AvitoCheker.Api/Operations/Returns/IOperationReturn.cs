@@ -1,4 +1,4 @@
-﻿namespace AvitoCheker.Api.Operations.Returns
+﻿namespace AvitoCheсker.Api.Operations.Returns
 {
     public interface IOperationReturn
     {

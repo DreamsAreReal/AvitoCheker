@@ -1,6 +1,6 @@
 ﻿
 
-namespace AvitoCheker.Api.Operations.Parameters
+namespace AvitoCheсker.Api.Operations.Parameters
 {
     public interface IOperationParameter
     {
