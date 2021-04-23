@@ -6,7 +6,7 @@ using System.Text;
 namespace AvitoCheker.Api.Exceptions
 {
     [Serializable]
-    public class WrongDataException : Exception
+    public class AccountNoValidException : ArgumentException
     {
         //
         // For guidelines regarding the creation of new exception types, see
@@ -15,19 +15,19 @@ namespace AvitoCheker.Api.Exceptions
         //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
         //
 
-        public WrongDataException()
+        public AccountNoValidException()
         {
         }
 
-        public WrongDataException(string message) : base(message)
+        public AccountNoValidException(string message) : base(message)
         {
         }
 
-        public WrongDataException(string message, Exception inner) : base(message, inner)
+        public AccountNoValidException(string message, Exception inner) : base(message, inner)
         {
         }
 
-        protected WrongDataException(
+        protected AccountNoValidException(
             SerializationInfo info,
             StreamingContext context) : base(info, context)
         {

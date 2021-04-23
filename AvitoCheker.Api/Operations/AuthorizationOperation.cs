@@ -21,7 +21,7 @@ namespace AvitoCheker.Api.Operations
             if (String.IsNullOrEmpty(data.Username)
                 && String.IsNullOrEmpty(data.Password))
             {
-                throw new WrongDataException();
+                throw new AccountNoValidException();
             }
             
 
@@ -33,23 +33,29 @@ namespace AvitoCheker.Api.Operations
             };
 
             var response = await (await client.PostAsync(Routes.BaseUrl + Routes.AuthUrl, new FormUrlEncodedContent(requestParams))).Content.ReadAsStringAsync();
-            var json = JsonConvert.DeserializeObject(response) as JObject;
-            var requestCode = json["status"].ToString();
+
+            if (JsonConvert.DeserializeObject(response) is JObject json)
+            {
+                var requestCode = json["status"]?.ToString();
 
 
-            if (requestCode == RequestCodes.WrongData)
-                throw new WrongDataException();
+                if (requestCode == RequestCodes.WrongData 
+                    || requestCode==RequestCodes.WrongPassword 
+                    || requestCode==RequestCodes.NeedSms
+                    || requestCode==RequestCodes.Blocked)
+                    throw new AccountNoValidException();
 
-            if (requestCode == RequestCodes.Success)
-                return new AuthorizationReturn
-                {
-                    Id = json["result"]?["user"]?["id"]?.ToString(),
-                    Name = json["result"]?["user"]?["name"]?.ToString(),
-                    Type = json["result"]?["user"]?["type"]?["name"]?.ToString(),
-                    Email = json["result"]?["type"]?["email"]?.ToString(),
-                    Phone = json["result"]?["type"]?["phone"]?.ToString(),
-                    Session = json["result"]?["session"]?.ToString(),
-                };
+                if (requestCode == RequestCodes.Success)
+                    return new AuthorizationReturn
+                    {
+                        Id = json["result"]?["user"]?["id"]?.ToString(),
+                        Name = json["result"]?["user"]?["name"]?.ToString(),
+                        Type = json["result"]?["user"]?["type"]?["name"]?.ToString(),
+                        Email = json["result"]?["type"]?["email"]?.ToString(),
+                        Phone = json["result"]?["type"]?["phone"]?.ToString(),
+                        Session = json["result"]?["session"]?.ToString(),
+                    };
+            }
 
 
             throw new Exception(response);

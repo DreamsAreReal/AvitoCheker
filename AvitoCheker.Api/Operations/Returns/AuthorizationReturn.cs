@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AvitoCheker.Api.Operations.Returns
 {
-    class AuthorizationReturn : IOperationReturn
+    public class AuthorizationReturn : IOperationReturn
     {
         public string Id { get; set; }
         public string Name { get; set; }
