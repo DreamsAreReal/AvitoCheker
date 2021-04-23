@@ -13,6 +13,8 @@ namespace AvitoChecker.UI
 {
     public static class Startup
     {
+        public static int MaxThreadCount { get; set; }
+
         public static void Configure()
         {
             var logger = LogManager.GetCurrentClassLogger();
@@ -23,7 +25,7 @@ namespace AvitoChecker.UI
             var servicesProvider = GetServiceCollection(config);
             using (servicesProvider as IDisposable)
             {
-                var runner = servicesProvider.GetRequiredService<Test>();
+                var runner = servicesProvider.GetRequiredService<RunTasks>();
                 runner.DoAction("Action1");
             }
         }
@@ -32,6 +34,7 @@ namespace AvitoChecker.UI
             return new ServiceCollection()
                 .AddTransient<ProxyStorage>()
                 .AddTransient<AccountStorage>()
+                .AddTransient<RunTasks>()
                 .AddLogging(loggingBuilder =>
                 {
                     loggingBuilder.ClearProviders();
