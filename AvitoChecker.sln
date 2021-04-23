@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvitoChecker.Core", "AvitoC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvitoCheker.Api", "AvitoCheker.Api\AvitoCheker.Api.csproj", "{6F4893DB-1041-43BE-B4F7-F84B8342E1B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvitoChecker.Api.Tests", "AvitoChecker.Api.Tests\AvitoChecker.Api.Tests.csproj", "{A5DA82D8-FE82-429C-AEDE-B700707FF1EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6F4893DB-1041-43BE-B4F7-F84B8342E1B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F4893DB-1041-43BE-B4F7-F84B8342E1B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F4893DB-1041-43BE-B4F7-F84B8342E1B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5DA82D8-FE82-429C-AEDE-B700707FF1EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5DA82D8-FE82-429C-AEDE-B700707FF1EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5DA82D8-FE82-429C-AEDE-B700707FF1EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5DA82D8-FE82-429C-AEDE-B700707FF1EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
