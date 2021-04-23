@@ -28,7 +28,9 @@ namespace AvitoCheker.Api
 
         public async Task<IOperationReturn> ExecuteOperation(IOperation operation, IOperationParameter parameters = null)
         {
-            return await operation.Execute(_client, parameters);
+            var result = await operation.Execute(_client, parameters);
+            operation.Dispose();
+            return result;
         }
 
 

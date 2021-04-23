@@ -8,8 +8,9 @@ using AvitoCheker.Api.Operations.Returns;
 
 namespace AvitoCheker.Api.Operations
 {
-    public interface IOperation
+    public interface IOperation : IDisposable
     {
         Task<IOperationReturn> Execute(HttpClient client, IOperationParameter parameters = null);
+
     }
 }

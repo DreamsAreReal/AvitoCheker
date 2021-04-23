@@ -67,5 +67,9 @@ namespace AvitoCheker.Api.Operations
             throw new Exception(response);
 
         }
+
+        public void Dispose()
+        {
+        }
     }
 }
