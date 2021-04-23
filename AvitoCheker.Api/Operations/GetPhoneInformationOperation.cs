@@ -27,8 +27,7 @@ namespace AvitoCheker.Api.Operations
             // If don't send key then will answer 403 code.
             var getParams = $"?key={Settings.AppKey}";
             var query = await client.GetAsync(Routes.BaseUrl + Routes.PhoneSettingsUrl + getParams);
-            if (query.StatusCode == HttpStatusCode.Forbidden)
-                throw new NeedAuthorizationException();
+
 
             var response = await query.Content.ReadAsStringAsync();
             
