@@ -14,7 +14,13 @@ namespace AvitoCheker.Api.Operations
 {
     public class AuthorizationOperation : IOperation
     {
-        public async Task<IOperationReturn> Execute(IOperationParameter parameters, HttpClient client)
+        /// <summary>
+        /// Authorization on site.
+        /// </summary>
+        /// <param name="client">Any client</param>
+        /// <param name="parameters">Required AuthorizationParameter</param>
+        /// <returns></returns>
+        public async Task<IOperationReturn> Execute(HttpClient client, IOperationParameter parameters = null)
         {
             var data = (AuthorizationParameter) parameters;
 

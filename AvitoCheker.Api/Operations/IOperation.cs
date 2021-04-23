@@ -10,6 +10,6 @@ namespace AvitoCheker.Api.Operations
 {
     public interface IOperation
     {
-        Task<IOperationReturn> Execute(IOperationParameter parameters, HttpClient client);
+        Task<IOperationReturn> Execute(HttpClient client, IOperationParameter parameters = null);
     }
 }

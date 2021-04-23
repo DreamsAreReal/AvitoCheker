@@ -18,8 +18,6 @@ namespace AvitoCheker.Api
 
         public Client(IWebProxy proxy = null)
         {
-           
-
             var cookie = new CookieContainer();
             _handler = new HttpClientHandler {CookieContainer = cookie};
             if (proxy != null)
@@ -28,9 +26,9 @@ namespace AvitoCheker.Api
             _client = new HttpClient(_handler);
         }
 
-        public async Task<IOperationReturn> ExecuteOperation(IOperation operation, IOperationParameter parameters)
+        public async Task<IOperationReturn> ExecuteOperation(IOperation operation, IOperationParameter parameters = null)
         {
-            return await operation.Execute(parameters, _client);
+            return await operation.Execute(_client, parameters);
         }
 
 
