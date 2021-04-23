@@ -1,4 +1,5 @@
 ﻿using System;
+using AvitoCheker.Api;
 
 namespace AvitoChecker.UI
 {
