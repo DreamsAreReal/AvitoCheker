@@ -12,6 +12,7 @@ namespace AvitoChecker.Core.Storages
         private const string ProxyFileName = "proxy.txt";
         public ProxyStorage() : base()
         {
+            _proxy = new List<(string, string)>();
             if(!File.Exists($"{FileDirectory}/{ProxyFileName}"))
                 File.WriteAllText($"{FileDirectory}/{ProxyFileName}", String.Empty);
             ReadFile();

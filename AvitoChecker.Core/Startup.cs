@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using AvitoChecker.Core;
+using AvitoChecker.Core.Storages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -15,38 +16,22 @@ namespace AvitoChecker.UI
         public static void Configure()
         {
             var logger = LogManager.GetCurrentClassLogger();
-            try
-            {
-                var config = new ConfigurationBuilder()
-                    .SetBasePath(System.IO.Directory.GetCurrentDirectory()) //From NuGet Package Microsoft.Extensions.Configuration.Json
-                    .Build();
+            var config = new ConfigurationBuilder()
+                .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                .Build();
 
-                var servicesProvider = GetServiceCollection(config);
-                using (servicesProvider as IDisposable)
-                {
-                    var runner = servicesProvider.GetRequiredService<Test>();
-                    runner.DoAction("Action1");
-
-                    Console.WriteLine("Press ANY key to exit");
-                    Console.ReadKey();
-                }
-            }
-            catch (Exception ex)
+            var servicesProvider = GetServiceCollection(config);
+            using (servicesProvider as IDisposable)
             {
-                // NLog: catch any exception and log it.
-                logger(ex, "Stopped program because of exception");
-                throw;
-            }
-            finally
-            {
-                // Ensure to flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
-                LogManager.Shutdown();
+                var runner = servicesProvider.GetRequiredService<Test>();
+                runner.DoAction("Action1");
             }
         }
         private static IServiceProvider GetServiceCollection(IConfiguration config)
         {
             return new ServiceCollection()
-                .AddTransient<Test>()
+                .AddTransient<ProxyStorage>()
+                .AddTransient<AccountStorage>()
                 .AddLogging(loggingBuilder =>
                 {
                     loggingBuilder.ClearProviders();
