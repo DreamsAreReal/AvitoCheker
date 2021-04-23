@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using AvitoCheker.Api.Operations;
 using AvitoCheker.Api.Operations.Parameters;
 using AvitoCheker.Api.Operations.Returns;
@@ -27,9 +28,9 @@ namespace AvitoCheker.Api
             _client = new HttpClient(_handler);
         }
 
-        public IOperationReturn ExecuteOperation(IOperation operation, IOperationParameter parameters)
+        public async Task<IOperationReturn> ExecuteOperation(IOperation operation, IOperationParameter parameters)
         {
-            return operation.Execute(parameters, _client);
+            return await operation.Execute(parameters, _client);
         }
 
 

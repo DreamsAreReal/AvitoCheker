@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AvitoCheker.Api": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false
+    }
+  }
+}
