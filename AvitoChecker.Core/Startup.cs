@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using AvitoChecker.Core;
 using AvitoChecker.Core.Storages;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +12,7 @@ using NLog.Extensions.Logging;
 
 namespace AvitoChecker.UI
 {
-    public static class Startup
+    public  static class Startup
     {
         public static int MaxThreadCount { get; set; }
 
@@ -25,8 +26,7 @@ namespace AvitoChecker.UI
             var servicesProvider = GetServiceCollection(config);
             using (servicesProvider as IDisposable)
             {
-                var runner = servicesProvider.GetRequiredService<RunTasks>();
-                runner.DoAction("Action1");
+                servicesProvider.GetRequiredService<RunTasks>().Start();
             }
         }
         private static IServiceProvider GetServiceCollection(IConfiguration config)

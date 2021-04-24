@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using AvitoChecker.Core.Exceptions;
+using NLog;
 
 namespace AvitoChecker.Core.Storages
 {
     class AccountStorage : AbstractStorage
     {
-        private List<(string, string)> _accounts;
+        public int Count => _accounts.Count;
+        private readonly List<(string, string)> _accounts;
         private const string ProxyFileName = "accounts.txt";
         public AccountStorage() : base()
         {
@@ -20,7 +22,6 @@ namespace AvitoChecker.Core.Storages
 
         public (string, string) Get()
         {
-            var random = new Random();
             var account = _accounts[0];
             _accounts.Remove(account);
             return account;
@@ -31,7 +32,10 @@ namespace AvitoChecker.Core.Storages
             var data = File.ReadAllLines($"{FileDirectory}/{ProxyFileName}");
 
             if (data.Length == 0)
+            {
+                LogManager.GetCurrentClassLogger().Error("Нужны аккаунты");
                 throw new NeedAccountException();
+            }
 
             foreach (var str in data)
             {

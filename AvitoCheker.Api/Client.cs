@@ -14,14 +14,17 @@ namespace AvitoCheсker.Api
         private readonly HttpClient _client;
         private readonly HttpClientHandler _handler;
 
-        public Client(IWebProxy proxy = null)
+        public Client(IWebProxy proxy)
         {
             var cookie = new CookieContainer();
-            _handler = new HttpClientHandler {CookieContainer = cookie};
-            if (proxy != null)
-                _handler.Proxy = proxy;
+            _handler = new HttpClientHandler();
+            _handler.Proxy = proxy;
+            _handler.UseCookies = true;
+            _handler.UseProxy = true;
 
             _client = new HttpClient(_handler);
+            _client.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
+            
         }
 
         public async Task<IOperationReturn> ExecuteOperation(IOperation operation, IOperationParameter parameters = null)

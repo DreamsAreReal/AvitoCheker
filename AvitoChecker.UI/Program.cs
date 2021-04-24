@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace AvitoChecker.UI
 {
@@ -7,14 +9,22 @@ namespace AvitoChecker.UI
         static void Main(string[] args)
         {
             // Fuck work. Ok?
-            // Rewrite.
+            // Todo: Rewrite.
             Console.WriteLine("Максимальное количество потоков?");
             Startup.MaxThreadCount = int.Parse(Console.ReadLine());
 
+            
+            Task.Run((() =>
+            {
+                Startup.Configure();
+                
+            }));
 
-            Startup.Configure();
-            Console.WriteLine("Press ANY key to exit");
-            Console.ReadKey();
+
+            while (true)
+            {
+                Console.ReadKey();
+            }
         }
     }
 }
